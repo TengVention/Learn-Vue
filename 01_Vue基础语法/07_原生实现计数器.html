@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>当前计数: <span>0</span></h2>
+    <button id="sub">-1</button>
+    <button id="add">+1</button>
+    <script>
+
+        const h2El = document.querySelector("h2")
+        const counterEl = document.querySelector("span")
+        const subBtnEl = document.querySelector("#sub")
+        const addBtnEl = document.querySelector("#add")
+
+        // 定义一个变量记录数据
+        let counter = 100
+        counterEl.textContent = counter
+
+        //点击事件
+        addBtnEl.onclick = function() {
+            counter++
+            counterEl.textContent = counter
+        }
+
+        subBtnEl.onclick = function() {
+            counter--
+            counterEl.textContent = counter
+        }
+
+    </script>
+</body>
+</html>
