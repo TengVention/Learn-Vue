@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <img v-bind:src="showImg" alt="">
+        <button @click="switchImg">切换图片</button>
+    </div>
+    <script src="../lib/vue.js"></script>
+    <script>
+
+        const app = Vue.createApp({
+            data: function() {
+                return {
+                    img1: "http://p1.music.126.net/04HKlGK05r-fDffoxHQJUw==/109951168598885814.jpg",
+                    img2: "http://p1.music.126.net/zInneYD-qXFF-nJmFuLXPg==/109951168598933198.jpg",
+                    showImg: "http://p1.music.126.net/zInneYD-qXFF-nJmFuLXPg==/109951168598933198.jpg"
+                }
+            },
+            methods: {
+                switchImg: function() {
+                    this.showImg === this.img1 ? this.showImg = this.img2 : this.showImg = this.img1
+                }
+            }
+        })
+
+        app.mount("#app")
+
+    </script>
+</body>
+</html>
