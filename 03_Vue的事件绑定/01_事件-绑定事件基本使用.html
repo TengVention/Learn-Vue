@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            background-color: orange;
+            width: 100px;
+            height: 100px;
+            margin-top: 10px;
+        }
+        .box2 {
+            background-color: purple;
+            width: 100px;
+            height: 100px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 基本写法 -->
+        <div class="box" v-on:click="divClick"></div>
+        <!-- 语法糖写法 -->
+        <div class="box2" @click="divClick"></div>
+        <!-- 表达式写法  不常用,不建议用 -->
+        <h2>{{ counter }}</h2>
+        <button @click="counter++" >+1</button>
+        <!-- 绑定其他方法 -->
+        <div class="box" @mousemove="divMousemove"></div>
+        <!-- 绑定多个方法 -->
+        <div class="box2" v-on="{ click: divClick, mousemove: divMousemove }"></div>
+    </div>
+    <script src="../lib/vue.js"></script>
+    <script>
+
+        const app = Vue.createApp({
+            data: function() {
+                return {
+                    counter: 0
+                }
+            },
+            methods: {
+                divClick() {
+                    console.log("div-click")
+                },
+                divMousemove() {
+                    console.log("div-mousemove")
+                }
+            }
+        })
+
+        app.mount("#app")
+
+    </script>
+</body>
+</html>
