@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .item {
+            background-color: orange;
+        }
+        .price {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h2>商品列表</h2>
+        <div class="item" v-for="item in products">
+            <h3 class="title">{{item.name}}</h3>
+            <span class="price">{{ item.price }}</span>
+            <p>秒杀: {{ item.desc }}</p>
+        </div>
+    </div>
+    <script src="../lib/vue.js"></script>
+    <script>
+
+        const app = Vue.createApp({
+            data: function() {
+                return {
+                    products: [
+                        { id: 100, name: "MateBook X", price: 9.9, desc: "9.9元秒杀华为笔记本" },
+                        { id: 101, name: "Mate60 pro+", price: 9.9, desc: "9.9元秒杀华为手机" },
+                        { id: 102, name: "AITO 问界M5 智驾版", price: 9.9, desc: "9.9元秒杀华为智选汽车" }
+                    ]
+                }
+            },
+            methods: {
+
+            }
+        })
+
+        app.mount("#app")
+
+    </script>
+</body>
+</html>
