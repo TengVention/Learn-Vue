@@ -20,40 +20,49 @@
             border: 1px solid #aaa;
             padding: 8px 16px;
         }
+        .active {
+            background-color: skyblue;
+        }
     </style>
 </head>
 
 <body>
     <div id="app">
         <!-- 1.搭建页面内容 -->
-        <table>
-            <thead>
-                <tr>
-                    <th>序号</th>
-                    <th>书籍名称</th>
-                    <th>出版日期</th>
-                    <th>价格</th>
-                    <th>购买数量</th>
-                    <th>操作</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="item in books" :key="item.id">
-                    <td>{{ item.id }}</td>
-                    <td>{{ item.name }}</td>
-                    <td>{{ item.date }}</td>
-                    <td>{{ formatPrice(item.price, 'USD') }}</td>
-                    <td>
-                        <button>-</button>
-                        {{ item.count }}
-                        <button>+</button>
-                    </td>
-                    <td>
-                        <button>移除</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <template v-if="books.length">
+            <table>
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>书籍名称</th>
+                        <th>出版日期</th>
+                        <th>价格</th>
+                        <th>购买数量</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(item, index) in books" 
+                        :key="item.id"
+                        @click="rowClick(index)"
+                        :class="{ active: index===currentIndex }">
+                        <td>{{ index + 1 }}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.date }}</td>
+                        <td>{{ formatPrice(item.price, 'USD') }}</td>
+                        <td>
+                            <button :disabled="item.count <= 1" @click="decrement(index, item)">-</button>
+                            {{ item.count }}
+                            <button @click="increment(index, item)">+</button>
+                        </td>
+                        <td>
+                            <button @click="removeBook(index)">移除</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </template>
+        <h2 v-else>购物车为空，请添加喜欢的书籍~</h2>
         <h2>总价：{{ formatPrice(totalPrice, 'USD') }}</h2>
     </div>
     <script src="../lib/vue.js"></script>
@@ -65,16 +74,31 @@
                 return {
                     // books: books
                     books,
+                    currentIndex: -1
                 }
             },
             methods: {
+                removeBook(index) {
+                    this.books.splice(index, 1)
+                },
+                decrement(index, item) {
+                    // this.books[index].count --
+                    item.count--
+                },
+                increment(index, item) {
+                    // this.books[index].count ++
+                    item.count++
+                },
                 formatPrice(price, currency) {
-                    switch(currency) {
+                    switch (currency) {
                         case "CNY":
                             return "￥" + price
                         case "USD":
                             return "$" + price
                     }
+                },
+                rowClick(index) {
+                    this.currentIndex = index
                 }
             },
             computed: {
@@ -86,7 +110,7 @@
                     // }
                     // return price
                     // 1.reduce实现
-                    return books.reduce((preValue, item) => {
+                    return this.books.reduce((preValue, item) => {
                         return preValue + item.price * item.count
                     }, 0)
                     // 简写
