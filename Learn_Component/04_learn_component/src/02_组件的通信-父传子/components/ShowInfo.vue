@@ -9,9 +9,26 @@
 <script>
 export default {
     data() {
-
+        return {
+            
+        }
     },
-    props: ["name", "age", "height"]
+    // props的数组用法
+    // props: ["name", "age", "height"]
+    props: {
+        name: {
+            type: String,
+            default: "我是默认的name"
+        },
+        age: {
+            type: Number,
+            default: 0
+        },
+        height: {
+            type: Number,
+            default: 1.11
+        }
+    }
 }
 </script>
 
