@@ -11,6 +11,15 @@
                 <a href="#">登录</a>
             </template>
         </nav-bar>
+
+        <nav-bar>
+            <template v-slot:[position]>
+                <a href="#">注册</a>
+            </template>
+        </nav-bar>
+        <button @click=" position = 'left' ">left</button>
+        <button @click=" position = 'center' ">center</button>
+        <button @click=" position = 'right' ">right</button>
     </div>
 </template>
 
@@ -19,6 +28,11 @@ import NavBar from './NavBar.vue';
 export default {
     components: {
         NavBar
+    },
+    data() {
+        return {
+            position: "center"
+        }
     }
 }
 </script>
