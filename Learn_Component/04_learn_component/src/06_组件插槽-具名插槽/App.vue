@@ -1,10 +1,10 @@
 <template>
     <div class="app">
         <nav-bar>
-            <template v-slot:left>
+            <template #left>
                 <button>返回</button>
             </template>
-            <template v-slot:center>
+            <template #center>
                 <span>内容</span>
             </template>
             <template v-slot:right>
